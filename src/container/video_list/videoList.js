@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Col} from 'react-bootstrap';
+import { selectVideo } from '../../actions/index';
+import { bindActionCreators } from 'redux';
 
 class VideoList extends Component {
 
@@ -9,7 +11,11 @@ class VideoList extends Component {
     //whatever state defined in mapStateToProps will be available as this.props here.
     return this.props.videos.map((video) => {
       return (
-        <li key={video.title} className="list-group-item">{video.title}</li>
+        <li
+          key={video.title}
+          onClick={() => this.props.selectVideo(video)}
+          className="list-group-item"
+          >{video.title}</li>
       );
     })
   }
@@ -27,8 +33,18 @@ class VideoList extends Component {
 //whenever our state changes, this function will render again
 function mapStateToProps(state) {
   return {
+    //videos its a direct reference from index.js in reducers
     videos: state.videos
   };
 }
 
-export default connect(mapStateToProps)(VideoList);
+//ACTION
+//anything returned from this function will end up as props in the VideoList container
+function mapDispatchToProps(dispatch) {
+  //whenever selectVideo is called, the result should be passed to all reducers
+  return bindActionCreators({ selectVideo: selectVideo}, dispatch )
+}
+
+//Promote VideoList from component to a container - it needs to know about this new dispatch method,
+// selectVideo . Make it available as a prop
+export default connect(mapStateToProps, mapDispatchToProps)(VideoList);
