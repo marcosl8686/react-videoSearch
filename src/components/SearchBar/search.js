@@ -22,18 +22,20 @@ class SearchBar extends Component {
   render() {
     return (
       <Col xs={12}>
-        <FormGroup >
-          <InputGroup>
-            <FormControl
-              type="text"
-              placeholder="Search"
-              value={this.state.term}
-              onChange={this.onInputChange} />
-            <InputGroup.Button>
-              <Button type="submit" onClick={this.onFormSubmit}>Search</Button>
-            </InputGroup.Button>
-          </InputGroup>
-        </FormGroup>
+        <form>
+          <FormGroup >
+            <InputGroup>
+              <FormControl
+                type="text"
+                placeholder="Search"
+                value={this.state.term}
+                onChange={this.onInputChange} />
+              <InputGroup.Button>
+                <Button type="submit" onClick={this.onFormSubmit}>Search</Button>
+              </InputGroup.Button>
+            </InputGroup>
+          </FormGroup>
+        </form>
       </Col>
     );
   }
