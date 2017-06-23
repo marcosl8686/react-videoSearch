@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Col, FormGroup, FormControl, ControlLabel, Button, InputGroup } from 'react-bootstrap';
+import FetchVideo from '../../actions/index';
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class SearchBar extends Component {
   }
   onFormSubmit = (event) => {
     event.preventDefault();
-    console.log("HIT")
+    FetchVideo(this.state.term);
   }
 
   render() {

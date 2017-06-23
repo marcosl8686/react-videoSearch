@@ -6,10 +6,16 @@ const ROOT_URL = 'https://www.googleapis.com/youtube/v3/search'
 export const FETCH_VIDEO = 'FETCH_VIDEO'
 export const VIDEO_SELECTED = 'VIDEO_SELECTED'
 
-export function fetchVideo(searchTerm) {
-  YTSearch({key: API_KEY, term: searchTerm}, (data) => {
-    console.log(data)
+export default function FetchVideo(searchTerm) {
+     YTSearch({key: API_KEY, term: searchTerm}, (data) => {
+      console.log(data)
+      return data
   });
+
+  return {
+    // type: FETCH_VIDEO,
+    // payload: data
+  }
 }
 
 

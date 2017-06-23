@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Col} from 'react-bootstrap';
-import { selectVideo } from '../../actions/index';
+import { selectVideo, YTSearch } from '../../actions/index';
 import { bindActionCreators } from 'redux';
 
 class VideoList extends Component {
@@ -21,6 +21,13 @@ class VideoList extends Component {
   }
 
   render() {
+    if(!this.props.videos){
+      return (
+        <Col xs={4}>
+          <h5> SELECT SOMETHING FIRST </h5>
+        </Col>
+      );
+    }
     return(
       <Col xs={4}>
         <ul className="list-group">
