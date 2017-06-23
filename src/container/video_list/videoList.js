@@ -1,24 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Col} from 'react-bootstrap';
-import { selectVideo, YTSearch } from '../../actions/index';
+import {Col, Image, Media, Left, Body, Heading} from 'react-bootstrap';
+import { selectVideo } from '../../actions/index';
 import { bindActionCreators } from 'redux';
+const imgURL = "video.snippet.thumbnails.default.url"
 
 class VideoList extends Component {
+  // componentDidMount(){
+	// 	this.props.selectVideo("cat");
+  //   }
 
   renderList() {
+    console.log(this.props.videos);
     //videos will be defined in mapStateToProps function.
     //whatever state defined in mapStateToProps will be available as this.props here.
     return this.props.videos.map((video) => {
       return (
         <li
-          key={video.title}
+          key={video.etag}
           onClick={() => this.props.selectVideo(video)}
           className="list-group-item"
-          >{video.title}</li>
+          >
+            <Media>
+               <Media.Left>
+                  <img width={64} height={64} src={video.snippet.thumbnails.default.url} alt="Image"/>
+                </Media.Left>
+                <Media.Body>
+                  {/* <Media.Heading>Media Heading</Media.Heading> */}
+                  <p>{video.snippet.title}</p>
+                </Media.Body>
+            </Media>
+        </li>
       );
     })
   }
+
+
 
   render() {
     if(!this.props.videos){

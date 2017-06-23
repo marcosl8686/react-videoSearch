@@ -1,4 +1,3 @@
-
 import YTSearch from 'youtube-api-search';
 
 const API_KEY = 'AIzaSyDCgEfJufpBJlEKSNfTsRdQfW4e4soPspU';
@@ -7,15 +6,17 @@ export const FETCH_VIDEO = 'FETCH_VIDEO'
 export const VIDEO_SELECTED = 'VIDEO_SELECTED'
 
 export default function FetchVideo(searchTerm) {
-     YTSearch({key: API_KEY, term: searchTerm}, (data) => {
-      console.log(data)
-      return data
-  });
+    let data = new Promise((resolve, reject) => {
+        YTSearch({key: API_KEY, term: searchTerm}, (data) => {
 
-  return {
-    // type: FETCH_VIDEO,
-    // payload: data
-  }
+            resolve(data);
+        });
+    });
+
+    return {
+        type: FETCH_VIDEO,
+        payload: data
+    }
 }
 
 
@@ -23,8 +24,8 @@ export function selectVideo(video) {
 
 //selectVideo is an ActionCreator, it needs to return an action,
 //an object with a type property
-  return {
-    type: VIDEO_SELECTED,
-    payload: video
-  };
+    return {
+        type: VIDEO_SELECTED,
+        payload: video
+    };
 }
