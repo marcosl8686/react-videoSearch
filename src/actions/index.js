@@ -5,7 +5,7 @@ const ROOT_URL = 'https://www.googleapis.com/youtube/v3/search'
 export const FETCH_VIDEO = 'FETCH_VIDEO'
 export const VIDEO_SELECTED = 'VIDEO_SELECTED'
 
-export default function FetchVideo(searchTerm) {
+export function fetchVideo(searchTerm) {
     let data = new Promise((resolve, reject) => {
         YTSearch({key: API_KEY, term: searchTerm}, (data) => {
 

@@ -4,9 +4,17 @@ import SearchBar from './SearchBar/search';
 import Header from './header/header';
 import VideoList from '../container/video_list/videoList';
 import VideoDetail from '../container/Video/video';
+import {connect} from 'react-redux';
+import {fetchVideo} from '../actions/index';
 
 
-export default class App extends Component {
+class App extends Component {
+  componentWillMount() {
+    const {dispatch} = this.props
+
+    dispatch(fetchVideo("cat"));
+  }
+
   render() {
     return (
       <Grid className="App">
@@ -20,3 +28,11 @@ export default class App extends Component {
     );
   }
 }
+
+function mapStateToProps() {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps)(App);

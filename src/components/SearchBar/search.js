@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Col, FormGroup, FormControl, ControlLabel, Button, InputGroup } from 'react-bootstrap';
-import FetchVideo from '../../actions/index';
+import {fetchVideo} from '../../actions/index';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -16,7 +16,8 @@ class SearchBar extends Component {
   }
   onFormSubmit = (event) => {
     event.preventDefault();
-    this.props.FetchVideo(this.state.term);
+    let {dispatch} = this.props;
+    dispatch(fetchVideo(this.state.term));
   }
 
   render() {
@@ -44,15 +45,9 @@ class SearchBar extends Component {
 function mapStateToProps(state) {
     return {
         //videos its a direct reference from index.js in reducers
-        videos: state.videos
+        videos: state.video.videos
     };
 }
 
-//ACTION
-//anything returned from this function will end up as props in the VideoList container
-function mapDispatchToProps(dispatch) {
-    //whenever selectVideo is called, the result should be passed to all reducers
-    return bindActionCreators({ FetchVideo: FetchVideo}, dispatch )
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export default connect(mapStateToProps)(SearchBar);

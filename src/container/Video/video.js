@@ -4,17 +4,16 @@ import { connect } from 'react-redux';
 import Typist from 'react-typist';
 
 class VideoDetail extends Component {
+
   render() {
-    if(!this.props.video){
+    let {selectedVideo} = this.props;
+    if(!selectedVideo) {
       return (
-        <Col xs={8}>
-          <Typist>
-            <h5> Welcome! Select a Video to Start </h5>
-          </Typist>
-        </Col>
-      );
+        <div>Loading...</div>
+      )
     }
-  const videoId = this.props.video.id.videoId;
+
+  const videoId = selectedVideo.id.videoId;
 	const url = `https://www.youtube.com/embed/${videoId}`;
 
     return(
@@ -22,8 +21,8 @@ class VideoDetail extends Component {
         <div className="embed-responsive embed-responsive-16by9">
           <iframe className="embed-responsive-item" src={url}></iframe>
         </div>
-        <Panel header={this.props.video.snippet.title}>
-              {this.props.video.snippet.description}
+        <Panel header={selectedVideo.snippet.title}>
+              {selectedVideo.snippet.description}
         </Panel>
       </Col>
     );
@@ -34,7 +33,7 @@ class VideoDetail extends Component {
 
 function mapStateToProps(state) {
   return {
-    video: state.activeVideo
+    selectedVideo: state.video.selectedVideo
   };
 }
 

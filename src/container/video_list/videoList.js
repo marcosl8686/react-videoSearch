@@ -6,15 +6,14 @@ import { bindActionCreators } from 'redux';
 const imgURL = "video.snippet.thumbnails.default.url"
 
 class VideoList extends Component {
-  // componentDidMount(){
-	// 	this.props.selectVideo("cat");
-  //   }
+
 
   renderList() {
     console.log(this.props.videos);
     //videos will be defined in mapStateToProps function.
     //whatever state defined in mapStateToProps will be available as this.props here.
     return this.props.videos.map((video) => {
+
       return (
         <li
           key={video.etag}
@@ -26,7 +25,6 @@ class VideoList extends Component {
                   <img width={64} height={64} src={video.snippet.thumbnails.default.url} alt="Image"/>
                 </Media.Left>
                 <Media.Body>
-                  {/* <Media.Heading>Media Heading</Media.Heading> */}
                   <p>{video.snippet.title}</p>
                 </Media.Body>
             </Media>
@@ -58,7 +56,7 @@ class VideoList extends Component {
 function mapStateToProps(state) {
   return {
     //videos its a direct reference from index.js in reducers
-    videos: state.videos
+    videos: state.video.videos
   };
 }
 
